@@ -1,0 +1,51 @@
+html,
+body {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+p{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 50px;
+  line-height: 18px;
+  font-weight: 400;
+  color: #000000;
+}
+
+.logo{
+  position: absolute;
+  top: 92vh;
+  left: 5vh;
+  z-index: 998;
+  max-width: 200px;
+  height: auto;
+  pointer-events: none
+}
+
+#fpsLabel {
+  position: absolute;
+  top: 25px;
+  z-index: 3;
+  background: blanchedalmond
+}
+
+#debugLabel {
+  position: absolute;
+  top: 5px;
+  z-index: -1;
+  background: blanchedalmond
+}
+
+
+/*BABYLON CSS*/
+#renderCanvas {
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    background: transparent
+    /*  */
+}
+

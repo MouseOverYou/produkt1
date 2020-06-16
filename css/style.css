@@ -45,7 +45,11 @@ p{
     width: 100%;
     height: 100%;
     touch-action: none;
-    background: transparent
-    /*  */
+    background: transparent;
+    display: block
+}
+
+#bgTest {
+  position: absolute;
 }
 

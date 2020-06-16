@@ -40,8 +40,6 @@ let AnimRate = 0
 engine.runRenderLoop(function () {
     if (sceneToRender) {
         sceneToRender.render();
-        var fpsLabel = document.getElementById("fpsLabel");
-        fpsLabel.innerHTML = engine.getFps().toFixed() + " fps";
     }
     /*
     if (UpdateAnimRate) {

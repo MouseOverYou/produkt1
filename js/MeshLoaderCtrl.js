@@ -4,7 +4,7 @@ let PacksList = []
 let AnimsList = []
 let PackColls = []
 
-function LoadAssets(scene, assetsManager) {
+function LoadAssets(scene, assetsManager, page) {
 
 
     //CanyonEnvTask
@@ -36,7 +36,7 @@ function LoadAssets(scene, assetsManager) {
 
 
     Packs_P = new BABYLON.TransformNode("Packs_P");
-    HumLoaderTask = assetsManager.addMeshTask("", "", "./assets/Produkt 1.glb")
+    HumLoaderTask = assetsManager.addMeshTask("", "", "./assets/" + page + ".glb")
 
     HumLoaderTask.onSuccess = function (task) {
 

@@ -14,14 +14,15 @@ var createScene = function () {
     var scene = new BABYLON.Scene(engine);
     var assetsManager = new BABYLON.AssetsManager(scene)
     CreateCustomMaterials()
-    LoadAssets(scene, assetsManager)
+    var page = document.title
+    console.log(page)
+    LoadAssets(scene, assetsManager, page)
 
     camera = CreateMainCamera()
     SetEnvMood(scene)
     CreateLighting()
     CreateParticlesHolder()
     CreateParticleTextures()
-    
 
     //var vrHelper = scene.createDefaultVRExperience({createDeviceOrientationCamera:false});
     SetPointerManager(scene)

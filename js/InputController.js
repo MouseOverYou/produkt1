@@ -25,7 +25,6 @@ function SetPointerManager(scene) {
         if (pickInfo && pickInfo.pickedMesh && !isAnimating) {
             CallPackPositionChange(pickInfo)
 
-
         }
     }
 }

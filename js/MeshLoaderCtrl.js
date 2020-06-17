@@ -1,4 +1,4 @@
-var Packs_P
+var Packs_P, Nuts_P
 var hdrTextureCity, hdrSkyboxMaterial, hdrSkybox,  CityEnvTask
 let PacksList = [] 
 let AnimsList = []
@@ -48,13 +48,6 @@ function LoadAssets(scene, assetsManager, page) {
         task.loadedMeshes[0].scaling = new BABYLON.Vector3(1,1, 1)
         task.loadedMeshes[0].parent = Packs_P
 
-        /*
-        task.loadedMeshes[0]._children[1].getChildTransformNodes(true).forEach(elem => {
-            AnimsList.push(elem);
-            elem.setEnabled(false)
-        });
-        */
-
         let j =0
         task.loadedMeshes[0]._children[0].getChildTransformNodes(true).forEach(elem => {
             elem.rotationQuaternion = null;
@@ -68,16 +61,91 @@ function LoadAssets(scene, assetsManager, page) {
             PackColls.push(packColl)
             j++
         });
-                
-        //move anims
-        //task.loadedMeshes[0]._children[1].position.z = 1.75
-        //task.loadedMeshes[0]._children[1].scaling = new BABYLON.Vector3(1.5, 1.5, 1.5)
+        
+        //custom animations
 
     }
 
     HumLoaderTask.onError = function (task, message, exception) {
         console.log(message, exception);
     }
+
+    //Custom animations
+    if(page == 'Produkt 7'){
+        Nuts_P = new BABYLON.TransformNode("Nuts_P");
+
+        NutsLoaderTask = assetsManager.addMeshTask("", "", "./assets/Nuts animation.glb")
+    
+        NutsLoaderTask.onSuccess = function (task) {
+    
+            task.loadedMeshes[0].position.x = 0
+            task.loadedMeshes[0].position.y = -0.06
+            task.loadedMeshes[0].position.z = 0
+            task.loadedMeshes[0].rotationQuaternion = null;
+            task.loadedMeshes[0].rotation.y = 0 * (Math.PI / 180)
+            task.loadedMeshes[0].scaling = new BABYLON.Vector3(1,1, 1)
+            task.loadedMeshes[0].parent = Nuts_P
+            Nuts_P.position.x = 0.1
+            NutsAnim = task.loadedAnimationGroups[0]
+            //NutsAnim.stop()
+            console.log(NutsAnim)
+    
+        }
+    
+        NutsLoaderTask.onError = function (task, message, exception) {
+            console.log(message, exception);
+        }
+    }
+
+
+    else if(page == 'Produkt 1'){
+        Avocado_P = new BABYLON.TransformNode("Avocado_P");
+
+        AvocadoTask = assetsManager.addMeshTask("", "", "./assets/avocado.glb")
+    
+        AvocadoTask.onSuccess = function (task) {
+    
+            task.loadedMeshes[0].position.x = 0.5
+            task.loadedMeshes[0].position.y = -0.06
+            task.loadedMeshes[0].position.z = 1
+            task.loadedMeshes[0].rotationQuaternion = null;
+            task.loadedMeshes[0].rotation.y = 120 * (Math.PI / 180)
+            task.loadedMeshes[0].scaling = new BABYLON.Vector3(10,10, 10)
+            task.loadedMeshes[0].parent = Avocado_P
+            AvocadoAnim = task.loadedAnimationGroups[0]
+            //AvocadoAnim.stop()
+            console.log(AvocadoAnim)
+    
+        }
+    
+        AvocadoTask.onError = function (task, message, exception) {
+            console.log(message, exception);
+        }
+    }
+    else if(page == 'Produkt 5'){
+        Lemon_P = new BABYLON.TransformNode("Lemon_P");
+
+        LemonTask = assetsManager.addMeshTask("", "", "./assets/lemon.glb")
+    
+        LemonTask.onSuccess = function (task) {
+    
+            task.loadedMeshes[0].position.x = -0.5
+            task.loadedMeshes[0].position.y = -0.06
+            task.loadedMeshes[0].position.z = 1.1
+            task.loadedMeshes[0].rotationQuaternion = null;
+            task.loadedMeshes[0].rotation.y = 90 * (Math.PI / 180)
+            task.loadedMeshes[0].scaling = new BABYLON.Vector3(7,7, 7)
+            task.loadedMeshes[0].parent = Lemon_P
+    
+        }
+    
+        LemonTask.onError = function (task, message, exception) {
+            console.log(message, exception);
+        }
+    }
+
+
+
 
 
     //FINISH

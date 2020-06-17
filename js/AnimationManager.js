@@ -277,3 +277,13 @@ function triggerSwooshUp() {
     swooshAnim.fromTo(swoosh_P.rotation, { y: 0 }, { y: 360 * (Math.PI / 180), duration: 3 })
     swooshAnim.fromTo(swoosh_P.position, { y: 0 }, { y: 2, duration: 3 }, "<")
 }
+
+//Custom Animations
+var PlayNuts = async function () {
+    NutsMaterial.alpha = 1
+    await StartNutsAnim();
+}
+
+function StartNutsAnim(){
+    NutsAnim.start(false, 1, 0.5, 6.25)
+}

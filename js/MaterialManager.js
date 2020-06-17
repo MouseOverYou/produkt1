@@ -80,6 +80,14 @@ function ChangeMaterialProperties() {
             mat.metallic = 0.3;
             mat.metallicF0Factor = 0.1
             mat.roughness = 0.25
+        }
+        else if(mat.name == "nuts Mat"){
+            mat.metallic = 0
+            mat.metallicF0Factor = 0
+            mat.roughness = 0.5
+            mat.transparencyMode = 2
+            mat.alpha =1
+            NutsMaterial = mat
 
         }
         

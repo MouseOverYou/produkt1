@@ -62,10 +62,10 @@ function BufferLemonAnim() {
             AddLemonReveal(i, "0")
         }
         else if (i == 1) {
-            AddLemonReveal(i, "0.1")
+            AddLemonReveal(i, "0.3")
         }
         else if (i == 2) {
-            AddLemonReveal(i, "0.2")
+            AddLemonReveal(i, "0.6")
         }
     }
 }
@@ -237,7 +237,8 @@ function createWinParticles(selec, pos) {
 
 }
 
-function CreateSwooshHolder() {
+var ps;
+function CreateSprayPS() {
     swoosh_P = new BABYLON.TransformNode('swoosh_P', scene)
 
     swooshHolder = BABYLON.Mesh.CreateBox("swooshHolder", 0.1, scene);
@@ -254,7 +255,7 @@ function CreateSwooshHolder() {
     swooshHolder.material = swooshMatPH
 
     // Create a particle system
-    var ps = new BABYLON.ParticleSystem("ps", 10000, scene);
+    ps = new BABYLON.ParticleSystem("ps", 10000, scene);
 
     //Texture of each particle
     ps.particleTexture = new BABYLON.Texture("assets/flare.png", scene);
@@ -288,7 +289,7 @@ function CreateSwooshHolder() {
     ps.addVelocityGradient(1.0, 3, 4);
 
     // Start the particle system
-    ps.start();
+    //ps.start();
 }
 
 var swooshAnim = gsap.timeline({ paused: true })
@@ -319,6 +320,10 @@ function StartIngAnim(page){
     }
     else if(page == 'Produkt 5'){
         LemonAnim.restart()
+        ps.start()
+        window.setTimeout(()=>{
+            ps.stop()
+        }, 1000)
     }
 
 }

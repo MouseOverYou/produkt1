@@ -161,6 +161,7 @@ function LoadAssets(scene, assetsManager, page) {
         EditMeshesPSR()
         AnimateReveal()
         BufferLemonAnim()
+        CreateSprayPS()
 
     }
     //Asset Manager check

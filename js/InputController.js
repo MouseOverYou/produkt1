@@ -23,7 +23,9 @@ function SetPointerManager(scene) {
 
         var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return (mesh.name.startsWith("PackCollider") && mesh.isPickable); });
         if (pickInfo && pickInfo.pickedMesh && !isAnimating) {
-            CallPackPositionChange(pickInfo)
+            console.log(page)
+            StartIngAnim(page)
+
 
         }
     }

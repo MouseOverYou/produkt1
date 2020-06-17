@@ -86,9 +86,8 @@ function ChangeMaterialProperties() {
             mat.metallicF0Factor = 0
             mat.roughness = 0.5
             mat.transparencyMode = 2
-            mat.alpha =1
+            mat.alpha = 0
             NutsMaterial = mat
-
         }
         
 

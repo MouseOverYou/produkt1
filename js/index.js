@@ -6,7 +6,7 @@ var sceneToRender = null;
 var createDefaultEngine = function () { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true }); };
 
 var BGDefault
-var currentWorld = "turbine"
+var page = document.title
 
 /******* Add the create scene function ******/
 var createScene = function () {
@@ -14,7 +14,7 @@ var createScene = function () {
     var scene = new BABYLON.Scene(engine);
     var assetsManager = new BABYLON.AssetsManager(scene)
     CreateCustomMaterials()
-    var page = document.title
+    
     console.log(page)
     LoadAssets(scene, assetsManager, page)
 
@@ -42,13 +42,6 @@ engine.runRenderLoop(function () {
     if (sceneToRender) {
         sceneToRender.render();
     }
-    /*
-    if (UpdateAnimRate) {
-        AnimRate += 0.01
-        TurnLightsOn(AnimRate)
-        console.log(AnimRate)
-    }
-    */
 });
 
 // Resize

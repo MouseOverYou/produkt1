@@ -1,6 +1,7 @@
-var Packs_P, Nuts_P
+var Packs_P, Nuts_P, AvocadoAnim
 var hdrTextureCity, hdrSkyboxMaterial, hdrSkybox,  CityEnvTask
-let PacksList = [] 
+let PacksList = []
+let LemonList = []  
 let AnimsList = []
 let PackColls = []
 
@@ -87,7 +88,7 @@ function LoadAssets(scene, assetsManager, page) {
             task.loadedMeshes[0].parent = Nuts_P
             Nuts_P.position.x = 0.1
             NutsAnim = task.loadedAnimationGroups[0]
-            //NutsAnim.stop()
+            NutsAnim.stop()
             console.log(NutsAnim)
     
         }
@@ -113,7 +114,8 @@ function LoadAssets(scene, assetsManager, page) {
             task.loadedMeshes[0].scaling = new BABYLON.Vector3(10,10, 10)
             task.loadedMeshes[0].parent = Avocado_P
             AvocadoAnim = task.loadedAnimationGroups[0]
-            //AvocadoAnim.stop()
+            AvocadoAnim.stop()
+            Avocado_P.setEnabled(false)
             console.log(AvocadoAnim)
     
         }
@@ -136,6 +138,11 @@ function LoadAssets(scene, assetsManager, page) {
             task.loadedMeshes[0].rotation.y = 90 * (Math.PI / 180)
             task.loadedMeshes[0].scaling = new BABYLON.Vector3(7,7, 7)
             task.loadedMeshes[0].parent = Lemon_P
+
+            task.loadedMeshes[0]._children[0].getChildTransformNodes(true).forEach(elem => {
+                elem.rotationQuaternion = null;
+                LemonList.push(elem);
+            });
     
         }
     
@@ -150,12 +157,10 @@ function LoadAssets(scene, assetsManager, page) {
 
     //FINISH
     assetsManager.onFinish = function (task) {
-        //CreateSwooshHolder()
         ChangeMaterialProperties()
         EditMeshesPSR()
         AnimateReveal()
-        //triggerSwooshUp()
-        //AddGlow()
+        BufferLemonAnim()
 
     }
     //Asset Manager check

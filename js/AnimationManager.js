@@ -1,5 +1,6 @@
 
 var RevealAnim = gsap.timeline({ paused: true });
+var LemonAnim = gsap.timeline({ paused: true });
 
 var startPos = []
 var SmallBottle = new BABYLON.Vector3(0.1, 0.1, 0.1);
@@ -54,6 +55,25 @@ function AddOneReveal(i, delay) {
     RevealAnim.to(PacksList[i].position, { x: startPos[i].x, y: startPos[i].y, z: startPos[i].z, ease: "power2.out", duration: 2 }, delay);
     RevealAnim.to(PacksList[i].rotation, { y: 0, ease: "power4.out", duration: 1.9 }, "<0.1");
     RevealAnim.to(PacksList[i].scaling, { x: 1, y: 1, z: 1, ease: "power4.out", duration: 1.9 }, "<");
+}
+function BufferLemonAnim() {
+    for (let i = 0; i < LemonList.length; i++) {
+        if (i == 0) {
+            AddLemonReveal(i, "0")
+        }
+        else if (i == 1) {
+            AddLemonReveal(i, "0.1")
+        }
+        else if (i == 2) {
+            AddLemonReveal(i, "0.2")
+        }
+    }
+}
+
+function AddLemonReveal(i, delay) {
+   
+    LemonAnim.from(LemonList[i].rotation, { y: 270 * (Math.PI / 180), ease: "power4.out", duration: 1.9 }, delay);
+    LemonAnim.from(LemonList[i].scaling, { x: 0, y: 0, z: 0, ease: "power4.out", duration: 1.9 }, "<");
 }
 
 function RevealRange() {
@@ -286,4 +306,19 @@ var PlayNuts = async function () {
 
 function StartNutsAnim(){
     NutsAnim.start(false, 1, 0.5, 6.25)
+}
+
+function StartIngAnim(page){
+    if(page == 'Produkt 1'){
+        Avocado_P.setEnabled(true)
+        AvocadoAnim.play()
+
+    }
+    else if(page == 'Produkt 7'){
+        PlayNuts()
+    }
+    else if(page == 'Produkt 5'){
+        LemonAnim.restart()
+    }
+
 }

@@ -18,13 +18,22 @@ function SetPointerManager(scene) {
 
     }
 
-    var showUI = false
+    var firsTime = true
     scene.onPointerDown = function () {
 
         var pickInfo = scene.pick(scene.pointerX, scene.pointerY, function (mesh) { return (mesh.name.startsWith("PackCollider") && mesh.isPickable); });
         if (pickInfo && pickInfo.pickedMesh && !isAnimating) {
             console.log(page)
-            StartIngAnim(page)
+            if(firsTime ){
+                StartIngAnim(page)
+                firsTime = false
+            }
+            else{
+                StartPackReaction(page)
+
+            }
+
+                
 
 
         }

@@ -1,4 +1,4 @@
-var Packs_P, Nuts_P, AvocadoAnim
+var Packs_P, Nuts_P, AvocadoAnim, LemonAnim
 var hdrTextureCity, hdrSkyboxMaterial, hdrSkybox,  CityEnvTask
 let PacksList = []
 let LemonList = []  
@@ -41,7 +41,7 @@ function LoadAssets(scene, assetsManager, page) {
 
     HumLoaderTask.onSuccess = function (task) {
 
-        task.loadedMeshes[0].position.x = 0
+        task.loadedMeshes[0].position.x = 2
         task.loadedMeshes[0].position.y = 0
         task.loadedMeshes[0].position.z = 0
         task.loadedMeshes[0].rotationQuaternion = null;
@@ -79,7 +79,7 @@ function LoadAssets(scene, assetsManager, page) {
     
         NutsLoaderTask.onSuccess = function (task) {
     
-            task.loadedMeshes[0].position.x = 0
+            task.loadedMeshes[0].position.x = 2
             task.loadedMeshes[0].position.y = -0.06
             task.loadedMeshes[0].position.z = 0
             task.loadedMeshes[0].rotationQuaternion = null;
@@ -106,9 +106,9 @@ function LoadAssets(scene, assetsManager, page) {
     
         AvocadoTask.onSuccess = function (task) {
     
-            task.loadedMeshes[0].position.x = 0.5
+            task.loadedMeshes[0].position.x = 1.5
             task.loadedMeshes[0].position.y = -0.06
-            task.loadedMeshes[0].position.z = 1
+            task.loadedMeshes[0].position.z = 1.2
             task.loadedMeshes[0].rotationQuaternion = null;
             task.loadedMeshes[0].rotation.y = 120 * (Math.PI / 180)
             task.loadedMeshes[0].scaling = new BABYLON.Vector3(10,10, 10)
@@ -131,18 +131,17 @@ function LoadAssets(scene, assetsManager, page) {
     
         LemonTask.onSuccess = function (task) {
     
-            task.loadedMeshes[0].position.x = -0.5
+            task.loadedMeshes[0].position.x = 1.5
             task.loadedMeshes[0].position.y = -0.06
-            task.loadedMeshes[0].position.z = 1.1
+            task.loadedMeshes[0].position.z = 1.5
             task.loadedMeshes[0].rotationQuaternion = null;
             task.loadedMeshes[0].rotation.y = 90 * (Math.PI / 180)
             task.loadedMeshes[0].scaling = new BABYLON.Vector3(7,7, 7)
             task.loadedMeshes[0].parent = Lemon_P
 
-            task.loadedMeshes[0]._children[0].getChildTransformNodes(true).forEach(elem => {
-                elem.rotationQuaternion = null;
-                LemonList.push(elem);
-            });
+            LemonAnim = task.loadedAnimationGroups[0]
+            LemonAnim.stop()
+            Lemon_P.setEnabled(false)
     
         }
     
@@ -160,7 +159,6 @@ function LoadAssets(scene, assetsManager, page) {
         ChangeMaterialProperties()
         EditMeshesPSR()
         AnimateReveal()
-        BufferLemonAnim()
         CreateSprayPS()
 
     }

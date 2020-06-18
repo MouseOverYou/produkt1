@@ -50,7 +50,7 @@ function AddShadows() {
 function AddGlow() {
     // Add lights to the scene
     var gl = new BABYLON.GlowLayer("glow", scene) //glow layer 
-    gl.intensity = 10;
+    gl.intensity = 0;
     scene.meshes.forEach(elem => {
         if (elem.name.startsWith("Screen_") || elem.name == "Video_Screens") {
             //gl.addExcludedMesh(elem)
@@ -79,16 +79,19 @@ function CreateMainCamera(){
 
 function SetEnvMood(scene){
     scene.clearColor = new BABYLON.Color4(0, 0, 0,0);
-    /*
-    scene.ambientColor = new BABYLON.Color3(1, 1, 1);
+    
+    scene.ambientColor = new BABYLON.Color4(1, 1, 1,0);
+    
     BGDefault = scene.createDefaultEnvironment({
-        groundColor: new BABYLON.Color4(0, 0, 0,0),
-        skyboxColor: new BABYLON.Color4(0, 0, 0,0)
+        groundColor: new BABYLON.Color4(1, 1, 1,0),
+        skyboxColor: new BABYLON.Color4(1, 1, 1,0)
 
     });
+
     BGDefault.skybox.setEnabled(false)
     BGDefault.rootMesh.position.y = -0.05
-    */
+
+    
 }
 
 

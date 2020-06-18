@@ -243,7 +243,7 @@ function CreateSprayPS() {
 
     swooshHolder = BABYLON.Mesh.CreateBox("swooshHolder", 0.1, scene);
     swooshHolder.isVisible = false
-    swooshHolder.position.x = 0.25
+    swooshHolder.position.x = 2.25
     swooshHolder.position.y = 2.125
     swooshHolder.position.z = 0
     swooshHolder.parent = swoosh_P
@@ -319,11 +319,23 @@ function StartIngAnim(page){
         PlayNuts()
     }
     else if(page == 'Produkt 5'){
-        LemonAnim.restart()
+        Lemon_P.setEnabled(true)
+        LemonAnim.play()
+    }
+}
+
+function StartPackReaction(page){
+    if(page == 'Produkt 1'){
+        console.log('do nothing')
+    }
+    else if(page == 'Produkt 7'){
+        
+    }
+    else if(page == 'Produkt 5'){
+        console.log('do spray')
         ps.start()
         window.setTimeout(()=>{
             ps.stop()
         }, 1000)
     }
-
 }

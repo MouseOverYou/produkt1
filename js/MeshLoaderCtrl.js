@@ -1,4 +1,4 @@
-var Packs_P, Nuts_P, AvocadoAnim, LemonAnim
+var Packs_P, Nuts_P, AvocadoAnim, LemonAnim, WaxDecke
 var hdrTextureCity, hdrSkyboxMaterial, hdrSkybox,  CityEnvTask
 let PacksList = []
 let LemonList = []  
@@ -62,9 +62,13 @@ function LoadAssets(scene, assetsManager, page) {
             PackColls.push(packColl)
             j++
         });
-        
-        //custom animations
-
+        if(page == 'Produkt 7'){
+            task.loadedMeshes[0]._children[0]._children[0]._children[1].rotationQuaternion = null;
+            task.loadedMeshes[0]._children[0]._children[0]._children[1]._children[0].rotationQuaternion = null;
+            task.loadedMeshes[0]._children[0]._children[0]._children[1].rotation.y = 90 * (Math.PI / 180);
+            WaxDecke = task.loadedMeshes[0]._children[0]._children[0]._children[1]
+            BufferDeckeWaxAnim()
+        }
     }
 
     HumLoaderTask.onError = function (task, message, exception) {
@@ -114,9 +118,11 @@ function LoadAssets(scene, assetsManager, page) {
             task.loadedMeshes[0].scaling = new BABYLON.Vector3(10,10, 10)
             task.loadedMeshes[0].parent = Avocado_P
             AvocadoAnim = task.loadedAnimationGroups[0]
-            AvocadoAnim.stop()
-            Avocado_P.setEnabled(false)
+            AvocadoAnim.pause()
+            AvocadoAnim.goToFrame(0)
             console.log(AvocadoAnim)
+
+            BufferAvocadoReveal()
     
         }
     
@@ -160,7 +166,6 @@ function LoadAssets(scene, assetsManager, page) {
         EditMeshesPSR()
         AnimateReveal()
         CreateSprayPS()
-
     }
     //Asset Manager check
     assetsManager.onProgress = function (remainingCount, totalCount, lastFinishedTask) {

@@ -1,6 +1,5 @@
 
 var RevealAnim = gsap.timeline({ paused: true });
-var LemonAnim = gsap.timeline({ paused: true });
 
 var startPos = []
 var SmallBottle = new BABYLON.Vector3(0.1, 0.1, 0.1);
@@ -56,25 +55,7 @@ function AddOneReveal(i, delay) {
     RevealAnim.to(PacksList[i].rotation, { y: 0, ease: "power4.out", duration: 1.9 }, "<0.1");
     RevealAnim.to(PacksList[i].scaling, { x: 1, y: 1, z: 1, ease: "power4.out", duration: 1.9 }, "<");
 }
-function BufferLemonAnim() {
-    for (let i = 0; i < LemonList.length; i++) {
-        if (i == 0) {
-            AddLemonReveal(i, "0")
-        }
-        else if (i == 1) {
-            AddLemonReveal(i, "0.3")
-        }
-        else if (i == 2) {
-            AddLemonReveal(i, "0.6")
-        }
-    }
-}
 
-function AddLemonReveal(i, delay) {
-   
-    LemonAnim.from(LemonList[i].rotation, { y: 270 * (Math.PI / 180), ease: "power4.out", duration: 1.9 }, delay);
-    LemonAnim.from(LemonList[i].scaling, { x: 0, y: 0, z: 0, ease: "power4.out", duration: 1.9 }, "<");
-}
 
 function RevealRange() {
     window.setTimeout(() => {
@@ -94,6 +75,18 @@ function ResetRangePos() {
         c++
     }
 
+}
+
+var waxDeckeAnim = gsap.timeline({paused: true}) 
+function BufferDeckeWaxAnim(){
+    waxDeckeAnim.fromTo(WaxDecke._children[0].rotation, {y: 0 * (Math.PI / 180)}, { y: 180 * (Math.PI / 180), duration: 2 });
+    waxDeckeAnim.fromTo(WaxDecke.rotation, {z: 0}, { z: 80 * (Math.PI / 180), ease: "power2.out", duration: 1 }, '<0.75');
+    waxDeckeAnim.fromTo(WaxDecke.rotation, {y: 90 * (Math.PI / 180)}, { y: 80 * (Math.PI / 180), ease: "power2.out", duration: 1 }, '<'); 
+}
+
+var avocadoRevealAnim = gsap.timeline({paused: true}) 
+function BufferAvocadoReveal(){
+    avocadoRevealAnim.from(Avocado_P.scaling, {x: 0, y: 0, z: 0 ,ease: "back.out(1.7)", duration: 1 });
 }
 
 //Change Focus PAck
@@ -124,82 +117,6 @@ function ChangeFocusPack(i) {
 
     //save lastPack
     lastPack = PacksList[i]
-}
-
-//play animation
-
-var grafikAnim;
-function ShowSelectedAnim(i) {
-
-    //Turn root_node ON
-    for (let k = 0; k < AnimsList.length; k++) {
-        if (i == k) {
-            window.setTimeout(() => {
-                AnimsList[k].setEnabled(true)
-            }, ChangeTime * 1000)
-
-        }
-        else {
-            AnimsList[k].setEnabled(false)
-        }
-    }
-    //go to Beginn of Video before start playing
-    AnimsList[i].getChildTransformNodes(true).forEach(elem => {
-        //play video on texture
-        if (elem.name.startsWith("Vid")) {
-            elem.getChildMeshes(true)[0].material.opacityTexture.video.currentTime = 0;
-            if (elem.getChildMeshes(true)[0].name == "gp0") {
-                elem.getChildMeshes(true)[0].material.albedoTexture.video.currentTime = 0;
-            }
-        }
-    })
-
-    window.setTimeout(() => {
-        var c = 0
-        grafikAnim = gsap.timeline()
-        AnimsList[i].getChildTransformNodes(true).forEach(elem => {
-            //play video on texture
-            if (elem.name.startsWith("Vid")) {
-                elem.getChildMeshes(true)[0].material.opacityTexture.video.play();
-                if (elem.getChildMeshes(true)[0].name == "gp0") {
-                    elem.getChildMeshes(true)[0].material.albedoTexture.video.play();
-                }
-            }
-
-            //set initial scaling
-            elem.scaling = new BABYLON.Vector3(0, 0, 0)
-
-            //animate scaling
-            if (c == 0)
-                grafikAnim.to(elem.scaling, { x: 1, y: 1, z: 1, ease: "back.out(4)", duration: 0.5 })
-            if (c == 1)
-                grafikAnim.to(elem.scaling, { x: 1, y: 1, z: 1, delay: 0.6, ease: "back.out(4)", duration: 0.5 }, "<0.2")
-            else
-                grafikAnim.to(elem.scaling, { x: 1, y: 1, z: 1, ease: "back.out(4)", duration: 0.5 }, "<0.2")
-
-
-            //play backwards
-            window.setTimeout(() => {
-                grafikAnim.to(elem.scaling, { x: 0, y: 0, z: 0, ease: "back.inOut(4)", duration: 1.25 }, "<0.1")
-            }, 3000)
-
-            c++
-
-        });
-
-
-    }, ChangeTime * 1000)
-
-    //scale On rest of elements
-    //play ANim backwards
-    //blend out video
-
-}
-
-
-function EndAnimation() {
-    isAnimating = false
-    console.log("grafik anim end")
 }
 
 //PARTICLES
@@ -293,7 +210,6 @@ function CreateSprayPS() {
 }
 
 var swooshAnim = gsap.timeline({ paused: true })
-
 function triggerSwooshUp() {
     swooshAnim.fromTo(swoosh_P.rotation, { y: 0 }, { y: 360 * (Math.PI / 180), duration: 3 })
     swooshAnim.fromTo(swoosh_P.position, { y: 0 }, { y: 2, duration: 3 }, "<")
@@ -311,8 +227,11 @@ function StartNutsAnim(){
 
 function StartIngAnim(page){
     if(page == 'Produkt 1'){
-        Avocado_P.setEnabled(true)
-        AvocadoAnim.play()
+        avocadoRevealAnim.play()
+        window.setTimeout(()=>{
+            AvocadoAnim.play(false)
+        }, 500)
+
 
     }
     else if(page == 'Produkt 7'){
@@ -324,11 +243,15 @@ function StartIngAnim(page){
     }
 }
 
+var openWax = false
 function StartPackReaction(page){
     if(page == 'Produkt 1'){
         console.log('do nothing')
     }
     else if(page == 'Produkt 7'){
+        waxDeckeAnim.paused(false)
+        waxDeckeAnim.reversed(openWax)
+        openWax = !openWax
         
     }
     else if(page == 'Produkt 5'){
